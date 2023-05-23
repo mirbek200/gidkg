@@ -11,7 +11,7 @@ from django.core.paginator import Paginator
 from apps.users.permissions import IsOwnerOrReadOnly
 
 
-class ProductListApiView(APIView):
+class PlaceListApiView(APIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
 
@@ -23,14 +23,14 @@ class ProductListApiView(APIView):
         return Response(serializers.data)
 
 
-class ProductFilterApiView(generics.ListAPIView):
+class PlaceFilterApiView(generics.ListAPIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category']
 
 
-class ProductCreateApiView(APIView):
+class PlaceCreateApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = PlaceSerializer
 
@@ -42,7 +42,7 @@ class ProductCreateApiView(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ProductDetailApiView(APIView):
+class PlaceDetailApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self, id):
@@ -58,7 +58,7 @@ class ProductDetailApiView(APIView):
         return Response(data)
 
 
-class ProductUpdateApiView(APIView):
+class PlaceUpdateApiView(APIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     serializer_class = PlaceSerializer
 
@@ -77,7 +77,7 @@ class ProductUpdateApiView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ProductDestroyApiView(APIView):
+class PlaceDestroyApiView(APIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_object(self, id):

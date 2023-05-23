@@ -20,6 +20,21 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyUser
+        fields = ['id', 'email', 'phone_number', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = MyUser.objects.create_superuser(
+            email=validated_data['email'],
+            phone_number=validated_data['phone_number'],
+            password=validated_data['password'],
+        )
+        return user
+
+
 class LoginSerializer(serializers.Serializer):
     email_or_phone_number = serializers.CharField()
     password = serializers.CharField()
