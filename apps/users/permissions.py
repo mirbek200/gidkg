@@ -11,11 +11,12 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return obj.user == request.user
 
 
-class IsManager(IsAuthenticated):
+class IsManager(permissions.BasePermission):
     def has_permission(self, request, view):
         is_authenticated = super().has_permission(request, view)
-        user = MyUser.objects.get(user=request.user)
-        if not is_authenticated:
+        if is_authenticated:
             return False
+
+        user = MyUser.objects.get(email=request.user.email)
 
         return user.is_manager
