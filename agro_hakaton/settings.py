@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-y+3q)7ok*6@ma5mqw@o%lk3h0ctokw3&(%n(q5ijo0s)_mzj5k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'users.MyUser'
 
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'apps.place',
     'rest_framework.authtoken',
     'corsheaders',
-    'drf_yasg'
+    'drf_yasg',
+    'apps.reating'
 ]
 
 
@@ -121,6 +122,12 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

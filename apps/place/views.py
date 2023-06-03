@@ -31,7 +31,7 @@ class PlaceFilterApiView(generics.ListAPIView):
 
 
 class PlaceCreateApiView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class = PlaceSerializer
 
     def post(self, request):
