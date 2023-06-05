@@ -12,5 +12,5 @@ class Comment(models.Model):
 
 class Rating(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
-    author = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     number = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
