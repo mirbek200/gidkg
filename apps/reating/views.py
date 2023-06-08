@@ -61,9 +61,12 @@ class DetailPlaceRatingView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+from django.db.models import Avg
+
+
 class PlaceRatingAPIView(APIView):
     def get(self, request):
-        ratings = Rating.objects.values('place_id').annotate(avg_rating=Avg('number'))
+        ratings = Rating.objects.values('place_id').annotate(avg_rating=Avg('number')).order_by('-avg_rating')[:3]
 
         result = {}
         for rating in ratings:
@@ -72,4 +75,5 @@ class PlaceRatingAPIView(APIView):
             result[place_id] = avg_rating
 
         return Response(result)
+
 

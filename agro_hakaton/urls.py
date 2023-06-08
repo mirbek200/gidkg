@@ -30,4 +30,5 @@ urlpatterns = [
     path('api/place/', include('apps.place.urls')),
     path('api/admin_panel/', include('apps.admin_panel.urls')),
     path('api/reating/', include('apps.reating.urls')),
+    path('api/transport/', include('apps.transport.urls')),
 ]

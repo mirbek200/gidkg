@@ -8,5 +8,4 @@ urlpatterns = [
     path('create_rating/', CreatePlaceRatingAPIView.as_view(), name='create_rating'),
     path('place_rating/', PlaceRatingAPIView.as_view(), name='place_rating'),
     path('detail_ratings/<int:rating_id>/', DetailPlaceRatingView.as_view(), name='rating-detail'),
-
 ]
