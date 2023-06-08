@@ -30,16 +30,21 @@ class PlaceFilterApiView(generics.ListAPIView):
     filterset_fields = ['category_id']
 
 
-class PlaceCreateApiView(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+class PlaceCreateApiView(generics.CreateAPIView):
+    queryset = Place.objects.all()
     serializer_class = PlaceSerializer
 
-    def post(self, request):
-        serializers = PlaceSerializer(data=request.data)
-        if serializers.is_valid():
-           serializers.save()
-           return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class PlaceCreateApiView(generics.CreateAPIView):
+#     # permission_classes = [permissions.IsAuthenticated]
+#     serializer_class = PlaceSerializer
+#
+#     def post(self, request):
+#         serializers = PlaceSerializer(data=request.data)
+#         if serializers.is_valid():
+#            serializers.save()
+#            return Response(serializers.data, status=status.HTTP_201_CREATED)
+#         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PlaceDetailApiView(APIView):

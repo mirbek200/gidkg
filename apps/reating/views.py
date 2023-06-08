@@ -1,6 +1,6 @@
 from django.db.models import Avg
 from django.http import Http404
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -18,15 +18,16 @@ class CommentsViewSet(viewsets.ModelViewSet):
 comments_viewset = CommentsViewSet.as_view({'get': 'list', 'post': 'create'})
 
 
-class CreatePlaceRatingAPIView(APIView):
+class CreatePlaceRatingAPIView(generics.CreateAPIView):
+    queryset = Rating.objects.all()
     serializer_class = RatingSerializer
 
-    def post(self, request):
-        serializers = RatingSerializer(data=request.data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def post(self, request):
+    #     serializers = RatingSerializer(data=request.data)
+    #     if serializers.is_valid():
+    #         serializers.save()
+    #         return Response(serializers.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DetailPlaceRatingView(APIView):
