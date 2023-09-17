@@ -7,6 +7,18 @@ from apps.transport.models import Transport
 from apps.transport.serializers import TransportSerializer
 from apps.users.permissions import IsOwnerOrReadOnly
 
+from django.db.models import Q
+
+class TransportSearchApiView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        query = request.data.get('query', None)
+        if query is not None:
+            transports = Transport.objects.filter(Q(where_from__icontains=query) | Q(where_to__icontains=query))
+            serializers = TransportSerializer(transports, many=True)
+            return Response(serializers.data)
+        return Response({"error": "No query provided"}, status=status.HTTP_400_BAD_REQUEST)
 
 class TransportCreateApiView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
